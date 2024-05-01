@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Calculator</title>
+  <style>
+    .calculator {
+      width: 200px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+    }
+    input[type="text"] {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+    button {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" disabled>
+    <button onclick="appendNumber(7)">7</button>
+    <button onclick="appendNumber(8)">8</button>
+    <button onclick="appendNumber(9)">9</button>
+    <button onclick="setOperator('+')">+</button><br>
+    <button onclick="appendNumber(4)">4</button>
+    <button onclick="appendNumber(5)">5</button>
+    <button onclick="appendNumber(6)">6</button>
+    <button onclick="setOperator('-')">-</button><br>
+    <button onclick="appendNumber(1)">1</button>
+    <button onclick="appendNumber(2)">2</button>
+    <button onclick="appendNumber(3)">3</button>
+    <button onclick="setOperator('*')">*</button><br>
+    <button onclick="appendNumber(0)">0</button>
+    <button onclick="clearDisplay()">C</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="setOperator('/')">/</button><br>
+  </div>
+
+  <script>
+    let currentNumber = '';
+    let operator = '';
+    let result = '';
+
+    function appendNumber(num) {
+      currentNumber += num;
+      document.getElementById('display').value = currentNumber;
+    }
+
+    function setOperator(op) {
+      operator = op;
+      if (result === '') {
+        result = currentNumber;
+      } else {
+        calculate();
+      }
+      currentNumber = '';
+    }
+
+    function calculate() {
+      switch (operator) {
+        case '+':
+          result = parseInt(result) + parseInt(currentNumber);
+          break;
+        case '-':
+          result = parseInt(result) - parseInt(currentNumber);
+          break;
+        case '*':
+          result = parseInt(result) * parseInt(currentNumber);
+          break;
+        case '/':
+          result = parseInt(result) / parseInt(currentNumber);
+          break;
+      }
+      document.getElementById('display').value = result;
+      currentNumber = '';
+      operator = '';
+    }
+
+    function clearDisplay() {
+      currentNumber = '';
+      operator = '';
+      result = '';
+      document.getElementById('display').value = '';
+    }
+  </script>
+</body>
+</html>
